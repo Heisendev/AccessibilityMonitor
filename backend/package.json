@@ -1,0 +1,19 @@
+{
+  "name": "accessibility-monitor-backend",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "node --watch src/index.js",
+    "start": "node src/index.js",
+    "copy-dist": "cp -r ../frontend/dist ./public"
+  },
+  "dependencies": {
+    "better-sqlite3": "^11.7.0",
+    "cors": "^2.8.5",
+    "cypress": "^14.1.0",
+    "cypress-axe": "^1.6.0",
+    "axe-core": "^4.10.2",
+    "express": "^5.0.1",
+    "node-cron": "^3.0.3"
+  }
+}
