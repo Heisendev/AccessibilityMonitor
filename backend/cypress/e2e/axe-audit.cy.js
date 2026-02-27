@@ -2,6 +2,8 @@ import urls from '../fixtures/urls.json';
 
 describe('Accessibility Audit', () => {
   urls.forEach(({ id, name, url }) => {
+
+    console.log(`Scheduling audit for ${name} (${url})`);
     it(`audits: ${name} (${url})`, () => {
       cy.visit(url, { failOnStatusCode: false });
       cy.injectAxe();
@@ -14,6 +16,7 @@ describe('Accessibility Audit', () => {
           },
         },
         (violations) => {
+          console.log(`Found ${violations.length} accessibility violations on ${url}`);
           if (violations.length > 0) {
             const slim = violations.map((v) => ({
               id: v.id,

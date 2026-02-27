@@ -8,12 +8,11 @@
     "copy-dist": "cp -r ../frontend/dist ./public"
   },
   "dependencies": {
+    "axe-core": "^4.10.2",
     "better-sqlite3": "^11.7.0",
     "cors": "^2.8.5",
-    "cypress": "^14.1.0",
-    "cypress-axe": "^1.6.0",
-    "axe-core": "^4.10.2",
     "express": "^5.0.1",
-    "node-cron": "^3.0.3"
+    "node-cron": "^3.0.3",
+    "playwright": "^1.50.0"
   }
 }

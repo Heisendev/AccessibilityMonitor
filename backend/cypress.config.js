@@ -1,6 +1,10 @@
 import { defineConfig } from 'cypress';
-import db from './src/db.js';
-import { getCurrentRunId } from './src/runner.js';
+import { existsSync, readFileSync, writeFileSync } from 'fs';
+import { join, dirname } from 'path';
+import { fileURLToPath } from 'url';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const violationsFile = join(__dirname, 'cypress/fixtures/violations-pending.json');
 
 export default defineConfig({
   e2e: {
@@ -13,25 +17,20 @@ export default defineConfig({
     setupNodeEvents(on) {
       on('task', {
         reportViolations({ urlId, violations }) {
-          const runId = getCurrentRunId();
+          const runId = process.env.MONITOR_RUN_ID;
           if (!runId) {
-            console.warn('[cypress task] No active run ID — violations not saved');
+            console.warn('[cypress task] No MONITOR_RUN_ID — violations not saved');
             return null;
           }
+/* 
+          const existing = existsSync(violationsFile)
+            ? JSON.parse(readFileSync(violationsFile, 'utf8'))
+            : [];
 
-          const insert = db.prepare(`
-            INSERT INTO violations (run_id, url_id, violation_id, impact, description, help, help_url, nodes_count)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-          `);
+          existing.push(...violations.map((v) => ({ ...v, urlId, runId })));
+          writeFileSync(violationsFile, JSON.stringify(existing)); */
 
-          const insertMany = db.transaction((items) => {
-            for (const v of items) {
-              insert.run(runId, urlId, v.id, v.impact, v.description, v.help, v.helpUrl, v.nodesCount);
-            }
-          });
-
-          insertMany(violations);
-          console.log(`[cypress task] Saved ${violations.length} violations for url_id=${urlId}`);
+          console.log(`[cypress task] Queued ${violations.length} violations for url_id=${urlId}`);
           return null;
         },
       });

@@ -1,22 +1,7 @@
 [
   {
     "id": 1,
-    "name": "doctolib",
-    "url": "https://www.doctolib.fr/"
-  },
-  {
-    "id": 2,
-    "name": "Mikahermet",
-    "url": "http://mikahermet.fr"
-  },
-  {
-    "id": 3,
-    "name": "LeBonCoin",
-    "url": "http://leboncoin.fr"
-  },
-  {
-    "id": 4,
-    "name": "Alma",
-    "url": "https://almapay.com/fr-FR"
+    "name": "tennislab",
+    "url": "http://tennislab.mikahermet.fr"
   }
 ]
