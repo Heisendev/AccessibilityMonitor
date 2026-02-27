@@ -1,11 +1,12 @@
 # Accessibility Monitor
 
-A self-hosted app that runs weekly accessibility audits on your URLs using **cypress-axe** and presents results in a React dashboard.
+A self-hosted app that runs weekly accessibility audits on your URLs using **Playwright + axe-core** and presents results in a React dashboard.
 
 ## Quick Start (Development)
 
 ```bash
 npm install
+npx playwright install chromium
 npm run dev
 ```
 
@@ -35,8 +36,7 @@ Weekly automated runs fire every **Monday at 08:00** via the built-in cron job.
 ```
 accessibility-monitor/
 ├── backend/
-│   ├── src/              # Express API, DB, cron, Cypress runner
-│   └── cypress/          # Cypress spec + config
+│   └── src/              # Express API, DB, cron, Playwright runner
 ├── frontend/
 │   └── src/              # React + Vite app
 └── data/                 # SQLite database (auto-created)
@@ -45,5 +45,5 @@ accessibility-monitor/
 ## Tech Stack
 
 - **Backend**: Node.js, Express 5, SQLite (better-sqlite3), node-cron
-- **Testing**: Cypress + cypress-axe (WCAG 2.0 AA + 2.1 AA)
+- **Auditing**: Playwright + axe-core (WCAG 2.0 AA + 2.1 AA)
 - **Frontend**: React 19, Vite, React Router 7, Recharts, Tailwind CSS 4
